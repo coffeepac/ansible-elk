@@ -1,0 +1,19 @@
+---
+- hosts: elk
+  roles:
+  - bakhti.elk
+  vars:
+    elk_kibana:
+      version: 4.0.2-linux-x86 
+      path: /opt/kibana
+      port: 5601
+      user: kibana
+      password:  kibana
+      allowed_addresses:
+        - 127.0.0.1
+    elk_logstash:
+      version: 1.5
+      pid_file: /var/run/logstash.pid
+      configs:
+        - { src: templates/logstash-forwarder.conf.j2, dest: logstash_forwarder.conf }
+      patterns: []
